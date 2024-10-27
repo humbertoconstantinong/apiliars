@@ -40,6 +40,12 @@ io.on("connection", (socket) => {
     console.log(`Jogador ${playerName} (${playerId}) entrou na sala ${room}`);
   });
 
+  socket.on("updateCards", ({ room, playerHands }) => {
+    // Emitir as cartas atualizadas para todos os jogadores na sala
+    io.to(room).emit("cardsUpdated", playerHands);
+    console.log(`Cartas atualizadas para a sala ${room}`);
+  });
+
   // Evento para a jogada
   socket.on("jogada", (room, dadosJogada) => {
     const { carta, playerId } = dadosJogada;
