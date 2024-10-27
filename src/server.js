@@ -74,6 +74,14 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("changePhoto", (data) => {
+    const { room, playerId, newPhoto } = data;
+
+    // Enviar a nova foto para todos na sala
+    io.to(room).emit("photoChanged", { playerId, newPhoto });
+    console.log(`Foto do jogador ${playerId} atualizada para ${newPhoto}`);
+  });
+
   // Evento para desconexão
   socket.on("disconnect", () => {
     console.log("Um jogador saiu do jogo.");
