@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
 
   // Evento para a jogada
   socket.on("jogada", (room, dadosJogada) => {
-    const { carta, playerId } = dadosJogada;
+    const { carta, playerId, lastCard } = dadosJogada;
 
     // Verifica se a sala existe e se possui jogadores
     if (rooms[room]) {
@@ -61,6 +61,7 @@ io.on("connection", (socket) => {
         io.to(room).emit("atualizacaoJogo", {
           carta,
           playerId,
+          lastCard,
           playerName: playerExists.name,
         });
         console.log(
