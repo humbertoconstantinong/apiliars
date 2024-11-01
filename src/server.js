@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
 
   // Evento para a jogada
   socket.on("jogada", (room, dadosJogada) => {
-    const { carta, playerId, lastCard } = dadosJogada;
+    const { carta, playerId, lastCard, vez } = dadosJogada;
 
     // Verifica se a sala existe e se possui jogadores
     if (rooms[room]) {
@@ -63,6 +63,7 @@ io.on("connection", (socket) => {
           playerId,
           lastCard,
           playerName: playerExists.name,
+          vez
         });
         console.log(
           `Jogada ${carta} realizada pelo jogador ${playerExists.name} (${playerId}) na sala ${room}`
